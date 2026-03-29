@@ -124,3 +124,8 @@ Break it like a hacker 😈
 👨‍💻 Credits
 
 Developed for technical events and competitions.
+
+
+fixes-
+Where evre there is bug written we have corrcted it.
+Fixed all small bugs in frontend and backend corrected API endpoints,inputtypes,placeholders,links,buttontypes,cart order,storage,dynamic rendering,and CSS for visibility and alignment.Now the app works fully with no runtime issues. 
