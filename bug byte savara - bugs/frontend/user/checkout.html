@@ -8,14 +8,20 @@
 <div class="content">
 <h2>Checkout</h2>
 
-<input id="name" placeholder="Enter email">
-<input id="card">
+<input id="name" type="text" placeholder="Enter email">
+<input id="card" type="text" placeholder="Enter card number">
 
-<button onclick="placeOrder()">Pay</button>
+<button type="button" onclick="placeOrder()">Pay</button>
 
-<p>Total: ₹0</p>
+<p id="total">Total: ₹0</p>
 </div>
 
 <script src="../js/app.js"></script>
+<script>
+const cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+const total = cart.reduce((sum, i) => sum + i.price, 0);
+document.getElementById("total").innerText = "Total: ₹" + total;
+</script>
+
 </body>
 </html>
