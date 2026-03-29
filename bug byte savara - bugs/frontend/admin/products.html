@@ -2,18 +2,18 @@
 <html>
 <body>
 
-<input id="name" placeholder="Enter ID">
-<input id="price">
+<input id="name" placeholder="Enter product name">
+<input id="price" type="number" placeholder="Enter price">
 
-<button onclick="addProduct()">Add</button>
+<button type="button" onclick="addProduct()">Add</button>
 
 <div id="list"></div>
 
 <script src="../js/app.js"></script>
 
 <script>
-check("admin");
-loadProducts();
+if (typeof check === "function") check("admin");
+if (typeof loadProducts === "function") loadProducts();
 </script>
 
 </body>
