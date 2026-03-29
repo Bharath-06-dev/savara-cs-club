@@ -19,8 +19,11 @@ let orders = [];
 /* REGISTER */
 app.post("/api/user/register", (req, res) => {
   const { username, password } = req.body;
-  if (!username) return res.json({ success: false });
-  USERS.push({ username, password }); // BUG
+  if (!username || !password) return res.json({ success: false });
+  if (USERS.find(u => u.username === username)) 
+  return res.json({ success: false });
+
+USERS.push({ username, password });
   res.json({ success: true });
 });
 
@@ -30,31 +33,44 @@ app.post("/api/user/login", (req, res) => {
     u => u.username === req.body.username &&
          u.password === req.body.password
   );
-  res.json({ success: user }); // BUG
+  res.json({ success: !!user });
 });
 
 /* ADMIN */
 app.post("/api/admin/login", (req, res) => {
-  res.json({ success: req.body.username === ADMIN.username }); // BUG
+  res.json({ 
+  success: req.body.username === ADMIN.username && 
+           req.body.password === ADMIN.password 
+});
 });
 
 /* PRODUCTS */
 app.get("/api/products", (req, res) => res.json(products));
 
 app.post("/api/products", (req, res) => {
-  products.push({ id: Date.now(), ...req.body }); // BUG
+  if (!req.body.name || !req.body.price) 
+  return res.json({ success: false });
+
+products.push({ id: Date.now(), name: req.body.name, price: req.body.price });
   res.json({ success: true });
 });
 
 app.delete("/api/products/:id", (req, res) => {
   const id = parseInt(req.params.id);
-  products = products.filter(p => p.id !== id); // BUG
+  const len = products.length;
+products = products.filter(p => p.id !== id);
+
+if (products.length === len) 
+  return res.json({ success: false });
   res.json({ success: true });
 });
 
 /* ORDERS */
 app.post("/api/orders", (req, res) => {
-  orders.push(req.body); // BUG
+  if (!req.body.items || !req.body.total) 
+  return res.json({ success: false });
+
+orders.push({ id: Date.now(), items: req.body.items, total: req.body.total });
   res.json({ success: true });
 });
 
