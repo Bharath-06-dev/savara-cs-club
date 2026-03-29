@@ -35,20 +35,19 @@ body {
   background: white;
   border-radius: 12px;
 
-  /* BUG */
   position: relative;
-  left: -15px;
+  left: 0; 
 }
 
 button {
   padding: 8px;
   background: #3b82f6;
-  color: #3b82f6; /* BUG */
+  color: white;
 }
 
 button:hover {
   background: white;
-  color: white;
+  color: #3b82f6;
 }
 
 .center-box {
@@ -60,7 +59,7 @@ button:hover {
 }
 
 .center-box h2 {
-  color: #f8fafc; /* BUG */
+  color: #020617; 
 }
 
 input {
