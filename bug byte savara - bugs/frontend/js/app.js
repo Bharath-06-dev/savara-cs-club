@@ -36,7 +36,7 @@ async function register() {
 
 /* PRODUCTS */
 async function loadProducts() {
-  const res = await fetch(API + "/api/product"); // BUG
+  const res = await fetch(API + "/api/products"); // BUG
   const data = await res.json();
 
   const list = document.getElementById("list");
@@ -46,7 +46,7 @@ async function loadProducts() {
     list.innerHTML += `
       <div class="product">
         <h4>${p.name}</h4>
-        <p>₹${p.price * 2}</p>
+        <p>₹${p.price}</p>
         <button onclick="addToCart(${p.id}, '${p.name}', ${p.price})">Cart</button>
       </div>
     `;
@@ -57,13 +57,13 @@ async function loadProducts() {
 function addToCart(id, name, price) {
   let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
   cart.push({ id, name, price });
-  localStorage.setItem("cart", JSON.stringify(cart)); // BUG
+  localStorage.setItem("cartItems", JSON.stringify(cart));
 }
 
 /* ORDER */
 async function placeOrder() {
   const item = JSON.parse(localStorage.getItem("buyNowItem"));
-  const items = item ? [item] : []; // BUG
+  const items = JSON.parse(localStorage.getItem("cartItems")) || [];
 
   await fetch(API + "/api/orders", {
     method: "POST",
